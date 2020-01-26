@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://ddupg.github.io/2020/01/26/MySQL-notes-Day3/</loc>
+    
+    <lastmod>2020-01-26T07:08:22.535Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://ddupg.github.io/2020/01/24/TED-Listening-to-shame/</loc>
     
     <lastmod>2020-01-24T06:14:28.182Z</lastmod>
@@ -23,13 +30,6 @@
   </url>
   
   <url>
-    <loc>https://ddupg.github.io/categories/index.html</loc>
-    
-    <lastmod>2020-01-24T06:14:28.182Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://ddupg.github.io/env/index.html</loc>
     
     <lastmod>2020-01-24T06:14:28.182Z</lastmod>
@@ -44,14 +44,14 @@
   </url>
   
   <url>
-    <loc>https://ddupg.github.io/2020/01/13/Shaded-Thirdparty-Dependencies/</loc>
+    <loc>https://ddupg.github.io/2019/12/05/Initial-Analysis-Region-Replicas/</loc>
     
     <lastmod>2020-01-24T06:14:28.181Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://ddupg.github.io/2019/12/05/Initial-Analysis-Region-Replicas/</loc>
+    <loc>https://ddupg.github.io/2020/01/13/Shaded-Thirdparty-Dependencies/</loc>
     
     <lastmod>2020-01-24T06:14:28.181Z</lastmod>
     

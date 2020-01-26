@@ -46,15 +46,22 @@
   };
 </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Ddupg">
-<meta property="og:url" content="https://ddupg.github.io/index.html">
+  <meta name="description" content="事务的隔离级别   隔离级别 描述 主要问题    读未提交（Read Uncommitted） 一个事务还没提交时，它做的变更就能被别的事务看到 脏读   读提交（Read Committed） 一个事务提交之后，它做的变更才会被其他事务看到 不可重复读   可重复读（Repeatable Read） 一个事务执行过程中看到的数据，总是跟这个事务在启动时看到的数据是一致的。当然在可重复读隔离级别">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL notes Day3：MySQL事务隔离">
+<meta property="og:url" content="https://ddupg.github.io/2020/01/26/MySQL-notes-Day3/index.html">
 <meta property="og:site_name" content="Ddupg">
+<meta property="og:description" content="事务的隔离级别   隔离级别 描述 主要问题    读未提交（Read Uncommitted） 一个事务还没提交时，它做的变更就能被别的事务看到 脏读   读提交（Read Committed） 一个事务提交之后，它做的变更才会被其他事务看到 不可重复读   可重复读（Repeatable Read） 一个事务执行过程中看到的数据，总是跟这个事务在启动时看到的数据是一致的。当然在可重复读隔离级别">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ddupg.github.io/images/MySQL_notes/day3-tx-readview.png">
+<meta property="article:published_time" content="2020-01-26T04:57:27.000Z">
+<meta property="article:modified_time" content="2020-01-26T07:08:22.535Z">
 <meta property="article:author" content="Ddupg">
+<meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ddupg.github.io/images/MySQL_notes/day3-tx-readview.png">
 
-<link rel="canonical" href="https://ddupg.github.io/">
+<link rel="canonical" href="https://ddupg.github.io/2020/01/26/MySQL-notes-Day3/">
 
 
 <script id="page-configurations">
@@ -62,11 +69,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false
+    isPost: true
   };
 </script>
 
-  <title>Ddupg</title>
+  <title>MySQL notes Day3：MySQL事务隔离 | Ddupg</title>
   
 
 
@@ -202,10 +209,10 @@
             
 
   <div class="posts-expand">
-        
+      
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://ddupg.github.io/2020/01/26/MySQL-notes-Day3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -219,8 +226,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/26/MySQL-notes-Day3/" class="post-title-link" itemprop="url">MySQL notes Day3：MySQL事务隔离</a>
+          MySQL notes Day3：MySQL事务隔离
         </h1>
 
         <div class="post-meta">
@@ -245,6 +251,13 @@
             </span>
 
           
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
 
         </div>
       </header>
@@ -255,7 +268,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别"></a>事务的隔离级别</h3><table>
+        <h3 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别"></a>事务的隔离级别</h3><table>
 <thead>
 <tr>
 <th>隔离级别</th>
@@ -293,336 +306,30 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> T &lt;T&gt; executeTx(Callable&lt;T&gt; callable) &#123;</span><br><span class="line">    T r;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 开启事务</span></span><br><span class="line">        r = callable.call();</span><br><span class="line">        <span class="comment">// 提交事务</span></span><br><span class="line">    &#125; <span class="keyword">catch</span> (Throwable t) &#123;</span><br><span class="line">        <span class="comment">// 回滚事务</span></span><br><span class="line">        <span class="keyword">throw</span> t;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在需要事务的时候通过执行<code>executeTx</code>开启，而不是单纯的将service层的方法作为事务执行的单位。比如可以在事务执行前，将需要用的的数据都查询出来，进行相应的处理计算，数据最终要入库时再调用<code>executeTx</code>使用事务。</p>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          </div>
 
         
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ddupg.github.io/2020/01/13/Shaded-Thirdparty-Dependencies/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Ddupg">
-      <meta itemprop="description" content="">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ddupg">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/13/Shaded-Thirdparty-Dependencies/" class="post-title-link" itemprop="url">Maven项目以Shaded形式引入第三方依赖库</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-01-13 17:46:06" itemprop="dateCreated datePublished" datetime="2020-01-13T17:46:06+08:00">2020-01-13</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>最近有用户反馈，他的项目中同时使用了HBase和一个RPC框架，HBase依赖2.5.0的protobuf，RPC框架依赖3.7的protobuf，导致他的项目编译都失败。0.98版本的HBase还是使用的原生的protobuf-java依赖，2.0版本才使用了shaded形式的protobuf，所以我们决定自己提供以shaded形式引入protobuf的HBase Client。</p>
-<p>相信这个问题不只是出现在HBase中，或者出现在与protobuf相关的项目中，其实当我们项目间接依赖了像protobuf、netty等大版本之间互不兼容的框架，甚至guava这种某些接口不兼容的框架，都有可能出现类似的问题。这里也是提供一个可以参考的解决方法。</p>
-<p>方法上，参考了HBase 2.0之后对第三方依赖的处理，简单来说就是将常用第三方依赖的代码负责一份，修改所有类的package，发布一个自己的artifact到仓库中。这样肯定就不会再依赖冲突了。</p>
-<p>而protobuf的依赖处理起来则比较麻烦一点，除了修改原生protobuf类的package之外，还需要处理proto生成的Java文件。所以本文就以protobuf为例，提供第三方依赖冲突的解决方案。因为都是使用Maven插件实现，所以也只对Maven项目有用，相信其他项目也有类似的解决办法。</p>
-<p>本文相关代码都已放在<a href="https://github.com/ddupg/demos/tree/master/shaded" target="_blank" rel="noopener">Github</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/01/13/Shaded-Thirdparty-Dependencies/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/01/24/TED-Listening-to-shame/" rel="prev" title="「TED」Listening to shame">
+      <i class="fa fa-chevron-left"></i> 「TED」Listening to shame
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ddupg.github.io/2019/12/05/Initial-Analysis-Region-Replicas/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Ddupg">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ddupg">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/05/Initial-Analysis-Region-Replicas/" class="post-title-link" itemprop="url">初步了解HBase Region Replicas</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-05 15:00:00" itemprop="dateCreated datePublished" datetime="2019-12-05T15:00:00+08:00">2019-12-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/HBase/" itemprop="url" rel="index">
-                    <span itemprop="name">HBase</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>CAP原理中，指出对于一个分布式系统来说，不可能同时满足一致性 (Consistency)、可用性（Availability）、分区容错性（Partition tolerance），而HBase则被设计成一个CP系统，保证了强一致性的同时，选择牺牲了一定的可用性。</p>
-<p>在对HBase的压测中，很容易发现虽然HBase的平均读写延迟很低，但却存在很高的毛刺，P99、P999延迟很高，主要的一个影响因素则是单点的GC，另外Region的MTTR（平均修复时间）也较高，一旦某个RegionServer宕机或某个Region出现问题，甚至是一次Full GC，都有可能出现较长时间的不可用，影响可用性。</p>
-<p>HBase的Read Region Replicas功能，提供一个或多个副本，在region恢复期间或请求时间过长时，支持最终一致性的读服务。在一些不要求强一致性的应用中，可以通过此功能来提高可用性降低读请求延迟。</p>
-<p>为了实现高可用读，HBase提供了一个feature，叫<code>region replication</code>。在这种模型下，表的每个region，都会有多个副本，分布在不同的RegionServer上。默认region replication为1，此时与之前的region模型并无不同。当region replication被设置为2或更多时，Master将会assign所有region的secondary region，Load Balancer会保证同一个region的多个备份会被分散在不同的RegionServer上。</p>
-<p>一个region的所有副本都有一个唯一的replica_id。replica_id=0的是primary region（和之前模型中唯一的region一样），其他的副本region被都叫做secondary region。</p>
-<p>primary region，支持读写请求；secondary region，只支持读请求。如此设计保证primary region依旧具有强一致性，同时提高读可用性。但也因为写请求只有primary region可以处理，所以写请求依然会因为primary region不可用而被阻塞，HBase的写可用性依然没有得到改善。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/12/05/Initial-Analysis-Region-Replicas/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ddupg.github.io/2019/10/11/CompletableFuture-in-high-concurrent/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Ddupg">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ddupg">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/11/CompletableFuture-in-high-concurrent/" class="post-title-link" itemprop="url">「记」Jdk8 CompletableFuture在高并发环境下的性能问题</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-10-11 19:30:00" itemprop="dateCreated datePublished" datetime="2019-10-11T19:30:00+08:00">2019-10-11</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>最近的工作内容就是写一个 DualHBaseClient，在查询数据时间过长时，能够将同样的请求发给 replication 的集群，缩小 client 端的 p99、p999 延迟，减小毛刺。<br>实际开发最初的一版代码都没有花费1pd，性能测试倒测了好几天都不及预期，甚至优化之后各方面性能更差劲。</p>
-<p>本文就是记录下导致此次性能问题的主要原因：CompletableFuture.</p>
-<p>使用 Java 异步编程的时候，CompletableFuture 用起来还是相当舒服的，在HBase的异步API里，也大量的使用了CompletableFuture，如果 CompletableFuture 有性能问题，那可就悲催了。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/10/11/CompletableFuture-in-high-concurrent/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ddupg.github.io/2019/09/30/class-init-order-in-inheritance/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Ddupg">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ddupg">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/09/30/class-init-order-in-inheritance/" class="post-title-link" itemprop="url">「记」子类复写父类方法与类初始化顺序引发的bug</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-09-30 10:00:00" itemprop="dateCreated datePublished" datetime="2019-09-30T10:00:00+08:00">2019-09-30</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="bug现象"><a href="#bug现象" class="headerlink" title="bug现象"></a>bug现象</h2><p>bug出现的条件：</p>
-<ul>
-<li>继承关系</li>
-<li>子类属性有默认的初始化</li>
-<li>子类复写了父类的钩子方法</li>
-<li>钩子方法在父类构造方法中调用</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/09/30/class-init-order-in-inheritance/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
   </article>
   
   
@@ -630,12 +337,10 @@
 
   </div>
 
-  
-
-
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -682,6 +387,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#事务的隔离级别"><span class="nav-number">1.</span> <span class="nav-text">事务的隔离级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务隔离的实现"><span class="nav-number">2.</span> <span class="nav-text">事务隔离的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#业务开发中对长事务的思考"><span class="nav-number">3.</span> <span class="nav-text">业务开发中对长事务的思考</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -816,6 +522,25 @@
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '1dbc316f8f5fd58b171a',
+      clientSecret: 'b1d7ecdf7193e4c74bd3749fd707839d851c8eef',
+      repo: 'ddupg.github.io',
+      owner: 'ddupg',
+      admin: ['ddupg'],
+      id: 'f69d773282d3e85963baeccfcffa2a3e',
+        language: 'zk-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>
