@@ -255,44 +255,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别"></a>事务的隔离级别</h3><table>
-<thead>
-<tr>
-<th>隔离级别</th>
-<th>描述</th>
-<th>主要问题</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>读未提交（Read Uncommitted）</td>
-<td>一个事务还没提交时，它做的变更就能被别的事务看到</td>
-<td>脏读</td>
-</tr>
-<tr>
-<td>读提交（Read Committed）</td>
-<td>一个事务提交之后，它做的变更才会被其他事务看到</td>
-<td>不可重复读</td>
-</tr>
-<tr>
-<td>可重复读（Repeatable Read）</td>
-<td>一个事务执行过程中看到的数据，总是跟这个事务在启动时看到的数据是一致的。当然在可重复读隔离级别下，未提交变更对其他事务也是不可见的</td>
-<td>幻读</td>
-</tr>
-<tr>
-<td>串行化（Serializable）</td>
-<td>同一行记录，“写”会加“写锁”，“读”会加“读锁”。当出现读写锁冲突的时候，后访问的事务必须等前一个事务执行完成，才能继续执行</td>
-<td></td>
-</tr>
-</tbody></table>
-<h3 id="事务隔离的实现"><a href="#事务隔离的实现" class="headerlink" title="事务隔离的实现"></a>事务隔离的实现</h3><p><img src="/images/MySQL_notes/day3-tx-readview.png" alt=""></p>
-<p>在 MySQL 中，实际上每条记录在更新的时候都会同时记录一条回滚操作，通过回滚操作，都可以得到前一个状态的值。在查询这条记录的时候，不同时刻启动的事务会有不同的 read-view，要得到 read-view A 的值，就要依次执行图中所有的回滚操作。</p>
-<p>记录这些回滚操作的回滚日志，只有当系统里没有比这个回滚日志更早的 read-view 的时候才会删除。</p>
-<p>所以长事务除了会影响访问速度之外，还会造成大量回滚日志无法删除，占用空间。</p>
-<h3 id="业务开发中对长事务的思考"><a href="#业务开发中对长事务的思考" class="headerlink" title="业务开发中对长事务的思考"></a>业务开发中对长事务的思考</h3><p>手动开闭事务，减少在开启过程中进行的无必要操作，自然是可以缩短事务时间。但对于业务开发来说，这无疑增加了开发成本。本来业务项目中使用各种ORM框架就是为了以面向对象的思维方式来操作关系型数据库，减少在业务代码中出现过多的数据库细节。而手动开闭事务，既对业务代码造成侵入，也无法保证逻辑出错时事务能正常关闭。</p>
-<p>所以事务的开闭还是应该由框架控制，除了Spring那样通过在方法上加注解的形式，之前在百度的工作中还见过一种办法，大概类似于下面这样。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> T &lt;T&gt; executeTx(Callable&lt;T&gt; callable) &#123;</span><br><span class="line">    T r;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 开启事务</span></span><br><span class="line">        r = callable.call();</span><br><span class="line">        <span class="comment">// 提交事务</span></span><br><span class="line">    &#125; <span class="keyword">catch</span> (Throwable t) &#123;</span><br><span class="line">        <span class="comment">// 回滚事务</span></span><br><span class="line">        <span class="keyword">throw</span> t;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在需要事务的时候通过执行<code>executeTx</code>开启，而不是单纯的将service层的方法作为事务执行的单位。比如可以在事务执行前，将需要用的的数据都查询出来，进行相应的处理计算，数据最终要入库时再调用<code>executeTx</code>使用事务。</p>
-
+          <p>极客时间MySQL实战45讲 <img src="https://time.geekbang.org/column/article/68963" alt="03 | 事务隔离：为什么你改了我还看不见？"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/01/26/MySQL-notes-Day3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

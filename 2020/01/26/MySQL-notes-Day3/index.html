@@ -46,20 +46,21 @@
   };
 </script>
 
-  <meta name="description" content="事务的隔离级别   隔离级别 描述 主要问题    读未提交（Read Uncommitted） 一个事务还没提交时，它做的变更就能被别的事务看到 脏读   读提交（Read Committed） 一个事务提交之后，它做的变更才会被其他事务看到 不可重复读   可重复读（Repeatable Read） 一个事务执行过程中看到的数据，总是跟这个事务在启动时看到的数据是一致的。当然在可重复读隔离级别">
+  <meta name="description" content="极客时间MySQL实战45讲">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL notes Day3：MySQL事务隔离">
 <meta property="og:url" content="https://ddupg.github.io/2020/01/26/MySQL-notes-Day3/index.html">
 <meta property="og:site_name" content="Ddupg">
-<meta property="og:description" content="事务的隔离级别   隔离级别 描述 主要问题    读未提交（Read Uncommitted） 一个事务还没提交时，它做的变更就能被别的事务看到 脏读   读提交（Read Committed） 一个事务提交之后，它做的变更才会被其他事务看到 不可重复读   可重复读（Repeatable Read） 一个事务执行过程中看到的数据，总是跟这个事务在启动时看到的数据是一致的。当然在可重复读隔离级别">
+<meta property="og:description" content="极客时间MySQL实战45讲">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://time.geekbang.org/column/article/68963">
 <meta property="og:image" content="https://ddupg.github.io/images/MySQL_notes/day3-tx-readview.png">
 <meta property="article:published_time" content="2020-01-26T04:57:27.000Z">
-<meta property="article:modified_time" content="2020-01-26T07:08:22.535Z">
+<meta property="article:modified_time" content="2020-01-26T07:30:00.171Z">
 <meta property="article:author" content="Ddupg">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://ddupg.github.io/images/MySQL_notes/day3-tx-readview.png">
+<meta name="twitter:image" content="https://time.geekbang.org/column/article/68963">
 
 <link rel="canonical" href="https://ddupg.github.io/2020/01/26/MySQL-notes-Day3/">
 
@@ -268,7 +269,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别"></a>事务的隔离级别</h3><table>
+        <p>极客时间MySQL实战45讲 <img src="https://time.geekbang.org/column/article/68963" alt="03 | 事务隔离：为什么你改了我还看不见？"></p>
+<a id="more"></a>
+
+<h3 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别"></a>事务的隔离级别</h3><table>
 <thead>
 <tr>
 <th>隔离级别</th>

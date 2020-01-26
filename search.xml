@@ -3,7 +3,10 @@
   <entry>
     <title>MySQL notes Day3：MySQL事务隔离</title>
     <url>/2020/01/26/MySQL-notes-Day3/</url>
-    <content><![CDATA[<h3 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别"></a>事务的隔离级别</h3><table>
+    <content><![CDATA[<p>极客时间MySQL实战45讲 <img src="https://time.geekbang.org/column/article/68963" alt="03 | 事务隔离：为什么你改了我还看不见？"></p>
+<a id="more"></a>
+
+<h3 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别"></a>事务的隔离级别</h3><table>
 <thead>
 <tr>
 <th>隔离级别</th>
