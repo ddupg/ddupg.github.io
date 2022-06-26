@@ -1,5 +1,5 @@
 ---
-to: blog/<%= name %>.md
+to: blog/<%= name %>/index.md
 ---
 ---
 slug: 
