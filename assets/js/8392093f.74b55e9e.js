@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkddupg_github_io=self.webpackChunkddupg_github_io||[]).push([[2545],{5883:a=>{a.exports=JSON.parse('{"label":"Gatsby","permalink":"/blog/tags/gatsby","allTagsPath":"/blog/tags","count":1}')}}]);
