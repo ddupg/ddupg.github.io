@@ -1,6 +1,6 @@
 ---
 slug: docusaurus-website-1
-title: Docusaurus建站（1）
+title: Docusaurus建站（1）- 项目初始化
 date: 2022-06-26T10:00
 author: Ddupg
 author_title: 数据库工程师

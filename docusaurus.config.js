@@ -81,7 +81,7 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: '本站',
             items: [
               {
                 label: 'Blog',
