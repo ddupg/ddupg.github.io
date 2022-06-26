@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkddupg_github_io=self.webpackChunkddupg_github_io||[]).push([[758],{1750:e=>{e.exports=JSON.parse('{"permalink":"/blog/tags/\u524d\u7aef","page":1,"postsPerPage":10,"totalPages":1,"totalCount":2,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);
