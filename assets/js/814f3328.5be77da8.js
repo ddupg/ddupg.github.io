@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkddupg_github_io=self.webpackChunkddupg_github_io||[]).push([[535],{5641:s=>{s.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"Docusaurus\u5efa\u7ad9\uff082\uff09","permalink":"/blog/docusaurus-website-2"},{"title":"Docusaurus\u5efa\u7ad9\uff081\uff09","permalink":"/blog/docusaurus-website-1"}]}')}}]);
