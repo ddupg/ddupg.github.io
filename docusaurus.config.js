@@ -69,7 +69,7 @@ const config = {
             label: 'Docs',
           },
           {
-            href: 'https://ddupg/github.io',
+            href: 'https://github.com/ddupg',
             label: 'GitHub',
             position: 'right',
           },
@@ -101,7 +101,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Ddupg. Built with Docusaurus.`,
       },
       prism: {
         theme: lightCodeTheme,
