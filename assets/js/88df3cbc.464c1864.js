@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkddupg_github_io=self.webpackChunkddupg_github_io||[]).push([[8100],{2035:e=>{e.exports=JSON.parse('{"label":"Hygen","permalink":"/blog/tags/hygen","allTagsPath":"/blog/tags","count":1}')}}]);
