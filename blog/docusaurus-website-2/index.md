@@ -55,7 +55,7 @@ oid: oid
 
 - 如果你的环境变量名字不是`ACCESS_TOKEN`，就改个环境变量名，其他的不要动
 
-```yml
+```yml title=".github/workflows/ci.yml"
 name: Deploy to GitHub Pages
 
 on:
