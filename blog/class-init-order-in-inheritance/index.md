@@ -3,9 +3,7 @@ slug: class-init-order-in-inheritance
 title: 「记」子类复写父类方法与类初始化顺序引发的bug
 date: 2019-09-30T10:00
 author: Ddupg
-author_title: 数据库工程师
 author_url: https://ddupg.github.io
-description: 请输入描述
 tags: [Java, Bug]
 ---
 

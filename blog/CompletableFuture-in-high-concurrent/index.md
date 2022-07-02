@@ -3,9 +3,7 @@ slug: CompletableFuture-in-high-concurrent
 title: 「记」Jdk8 CompletableFuture在高并发环境下的性能问题
 date: 2019-10-11T19:30
 author: Ddupg
-author_title: 数据库工程师
 author_url: https://ddupg.github.io
-description: 请输入描述
 tags: [Jdk, Java]
 ---
 

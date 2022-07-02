@@ -3,9 +3,7 @@ slug: HBase-SCP-and-TRSP
 title: HBase SCP & TRSP
 date: 2020-04-16T15:20
 author: Ddupg
-author_title: 数据库工程师
 author_url: https://ddupg.github.io
-description: 请输入描述
 tags: [HBase]
 ---
 

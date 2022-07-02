@@ -3,10 +3,8 @@ slug: docusaurus-website-3
 title: Docusaurus建站（3）- hygen生成页面模版
 date: 2022-06-26T12:00
 author: Ddupg
-author_title: 数据库工程师
 author_url: https://ddupg.github.io
-description: 请输入描述
-tags: [Docusaurus, React, 前端]
+tags: [Docusaurus, Hygen, 前端]
 oid: oid
 ---
 

@@ -3,9 +3,7 @@ slug: Shaded-Thirdparty-Dependencies
 title: Maven项目以Shaded形式引入第三方依赖库
 date: 2020-01-13T17:46
 author: Ddupg
-author_title: 数据库工程师
 author_url: https://ddupg.github.io
-description: 请输入描述
 tags: [Java]
 ---
 

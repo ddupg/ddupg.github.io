@@ -3,7 +3,6 @@ slug: HBase不停服跨集群数据迁移
 title: HBase不停服跨集群数据迁移
 date: 2020-03-14T15:42
 author: Ddupg
-author_title: 数据库工程师
 author_url: https://ddupg.github.io
 tags: [HBase]
 ---

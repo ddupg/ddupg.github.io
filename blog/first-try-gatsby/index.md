@@ -3,7 +3,6 @@ slug: first-try-gatsby
 title: 初尝Gatsby
 date: 2022-06-18T08:11
 author: Ddupg
-author_title: 数据库工程师
 author_url: https://ddupg.github.io
 tags: [Gatsby, React, 前端]
 ---

@@ -3,7 +3,6 @@ slug: Initial-Analysis-Region-Replicas
 title: 初步了解HBase Region Replicas
 date: 2019-12-05T15:00
 author: Ddupg
-author_title: 数据库工程师
 author_url: https://ddupg.github.io
 tags: [HBase]
 ---
