@@ -1,4 +1,4 @@
-import { Website } from '../interface';
+import { Website } from './interface';
 import { Avatar, Card, } from 'antd';
 import React from 'react';
 import { toast } from 'react-toastify';

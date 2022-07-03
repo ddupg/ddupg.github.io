@@ -1,10 +1,10 @@
 import React from "react";
 import SubHeader from "./SubHeader";
 import WebsiteCard from "./WebsiteCard";
-import { Classify } from "../interface";
+import { Classify } from "./interface";
 
 const NavigationPage: React.FC<{classifies: Classify[]}> = ({classifies}) => {
-  return <div className='m-12 mt-0'>
+  return <div className='mt-0 mb-12 ml-12 mr-12'>
     {
       classifies.map((classify) => {
         return <div>
