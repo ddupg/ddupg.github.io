@@ -69,6 +69,11 @@ const config = {
             label: 'Docs',
           },
           {
+            to: '/navigation',
+            position: 'left',
+            label: '导航',
+          },
+          {
             href: 'https://github.com/ddupg',
             label: 'GitHub',
             position: 'right',
@@ -108,6 +113,22 @@ const config = {
         darkTheme: darkCodeTheme,
       },
     }),
+    plugins: [
+      async function myPlugin(context, options) {
+        return {
+          name: 'postcss-tailwindcss-loader',
+          configurePostCss(postcssOptions) {
+              postcssOptions.plugins.push(
+                  require('postcss-import'),
+                  require('tailwindcss'),
+                  require('postcss-nested'),
+                  require('autoprefixer'),
+              )
+              return postcssOptions
+          },
+        }
+      },
+    ],
 };
 
 module.exports = config;
