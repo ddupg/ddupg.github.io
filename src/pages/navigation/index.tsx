@@ -41,12 +41,12 @@ const SubTitle: React.FC<{title: string}> = ({title}) => {
 }
 
 const WebsiteCard: React.FC<{website: Website}> = ({website}) => {
-  const { name, intro, url, icon } = website;
+  const { name, intro, url } = website;
 
   console.log(website)
   const [showCopy, setShowCopy] = useState(false)
   const onCopy = () => {
-    copy(website.url)
+    copy(url)
     setShowCopy(true)
   };
 
@@ -58,10 +58,10 @@ const WebsiteCard: React.FC<{website: Website}> = ({website}) => {
       >
         <CardContent sx={{ paddingBottom: 0 }}>
           <Typography variant="h6" component="div">
-            {website.name}
+            {name}
           </Typography>
           <Typography variant="body2" color="text.secondary" noWrap={true} paragraph={true} >
-            {website.intro}
+            {intro}
           </Typography>
         </CardContent>
         <CardActions sx={{ display: "flex", justifyContent: 'flex-end', paddingTop: 0, paddingBottom: 0 }}>
