@@ -30,6 +30,21 @@ const navigationData: Classify[] = [
         url: "https://archive.apache.org/dist/maven/maven-3/",
         intro: "maven3.x 历史版本下载"
       },
+      {
+        name: "GCeasy",
+        url: "https://gceasy.io/",
+        intro: "Java GC日志分析"
+      },
+      {
+        name: "fastThread",
+        url: "https://fastthread.io/",
+        intro: "Java Thread Dump分析"
+      },
+      {
+        name: "HeapHero",
+        url: "https://heaphero.io/",
+        intro: "Java Heap Dump分析"
+      },
     ],
   },
   {
