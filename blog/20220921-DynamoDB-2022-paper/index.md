@@ -9,8 +9,11 @@ description: DynamoDB 2022 paper内部分享
 tags: [数据库, DynamoDB]
 ---
 
-# DynamoDB2022论文
+最近AWS发布了DynamoDB新论文，不是涉及细节的学术论文，而是介绍了公有云在工业生产实践上的设计与实践。值得思考和学习。
 
+这是在内部分享使用的，基本是论文翻译了。
+
+<!-- truncate -->
 
 ## Abstract
 DynamoDB是一个NoSQL云数据库，在任何规模下提供一致的性能体验。基本属性：一致的性能，可用性，可靠性，全托管的serverless体验。在2021年，66-hour Amazon Prime Day shooping enent（购物节），Amazon的系统对DynamoDB的调用峰值8900万/秒，高可用性和毫秒级的性能。自从2012年DynamoDB发布，它的设计和实现不断发展。该系统在不影响可用性和性能的情况下，成功解决了**公平问题（多租户？）、跨partition流量不均衡问题、监控、自动化运维**。可靠性（可用性）至关重要，因为即使是最轻微的中断也会对客户产生重大影响。本文介绍了我们大规模操作 DynamoDB 的经验，以及架构如何继续发展以满足客户工作负载不断增长的需求。
