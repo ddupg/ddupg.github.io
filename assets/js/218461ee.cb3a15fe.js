@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkddupg_github_io=self.webpackChunkddupg_github_io||[]).push([[5024],{9948:a=>{a.exports=JSON.parse('{"label":"DynamoDB","permalink":"/blog/tags/dynamo-db","allTagsPath":"/blog/tags","count":1}')}}]);
