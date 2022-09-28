@@ -20,6 +20,11 @@ const navigationData: Classify[] = [
         url: "https://jex.im/regulex",
         intro: "可视化正则"
       },
+      {
+        name: "图片压缩",
+        url: "https://picdiet.eula.club/",
+        intro: "能极速压缩80%的图片大小，而不损害其质量"
+      },
     ],
   },
   {
