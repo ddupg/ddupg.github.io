@@ -12,6 +12,17 @@ const navigationData: Classify[] = [
     ],
   },
   {
+    name: "工具",
+    intro: "工具类网站",
+    websites: [
+      {
+        name: "可视化正则",
+        url: "https://jex.im/regulex",
+        intro: "可视化正则"
+      },
+    ],
+  },
+  {
     name: "后端",
     intro: "前端开发相关资料网站",
     websites: [
