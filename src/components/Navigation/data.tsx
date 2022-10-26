@@ -9,6 +9,11 @@ const navigationData: Classify[] = [
         url: "https://github.com",
         intro: "全球最大同性交友网站。"
       },
+      {
+        name: "Linux命令搜索",
+        url: "https://wangchujiang.com/linux-command/",
+        intro: "Linux命令大全搜索工具，内容包含Linux命令手册、详解、学习、搜集。"
+      },
     ],
   },
   {
