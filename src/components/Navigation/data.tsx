@@ -30,6 +30,11 @@ const navigationData: Classify[] = [
         url: "https://picdiet.eula.club/",
         intro: "能极速压缩80%的图片大小，而不损害其质量"
       },
+      {
+        name: "Mermaid文档",
+        url: "https://mermaid-js.github.io/mermaid/",
+        intro: "Mermaid：Markdown画图"
+      }
     ],
   },
   {
