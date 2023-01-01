@@ -39,7 +39,7 @@ const navigationData: Classify[] = [
   },
   {
     name: "后端",
-    intro: "前端开发相关资料网站",
+    intro: "后端开发相关资料网站",
     websites: [
       {
         name: "OpenJDK",
@@ -106,6 +106,17 @@ const navigationData: Classify[] = [
         name: "Tailwind CSS",
         url: "https://www.tailwindcss.cn/",
         intro: "Tailwind CSS 是一个功能类优先的 CSS 框架，它集成了诸如 flex, pt-4, text-center 和 rotate-90 这样的的类，它们能直接在脚本标记语言中组合起来，构建出任何设计。",
+      },
+    ],
+  },
+  {
+    name: "教程",
+    intro: "开发教程类",
+    websites: [
+      {
+        name: "Comprehensive Rust",
+        url: "https://google.github.io/comprehensive-rust/",
+        intro: "Google内部Rust教程",
       },
     ],
   },
