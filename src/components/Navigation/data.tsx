@@ -34,7 +34,12 @@ const navigationData: Classify[] = [
         name: "Mermaid文档",
         url: "https://mermaid-js.github.io/mermaid/",
         intro: "Mermaid：Markdown画图"
-      }
+      },
+      {
+        name: "Excalidraw",
+        url: "https://excalidraw.com/",
+        intro: "免费的手绘风格白板应用，能够画各种流程图、示意图、架构图"
+      },
     ],
   },
   {
