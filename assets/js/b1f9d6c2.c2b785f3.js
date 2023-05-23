@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkddupg_github_io=self.webpackChunkddupg_github_io||[]).push([[4073],{2662:a=>{a.exports=JSON.parse('{"label":"Compaction","permalink":"/blog/tags/compaction","allTagsPath":"/blog/tags","count":1}')}}]);
