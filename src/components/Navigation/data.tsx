@@ -133,6 +133,11 @@ const navigationData: Classify[] = [
         url: "https://google.github.io/comprehensive-rust/",
         intro: "Google内部Rust教程",
       },
+      {
+        name: "凤凰架构",
+        url: "https://icyfenix.cn/",
+        intro: "构建可靠的大型分布式系统",
+      },
     ],
   },
 ];
