@@ -138,6 +138,11 @@ const navigationData: Classify[] = [
         url: "https://icyfenix.cn/",
         intro: "构建可靠的大型分布式系统",
       },
+      {
+        name: "互联网公司常用框架源码赏析",
+        url: "https://doocs.github.io/source-code-hunter/",
+        intro: "互联网公司常用框架源码赏析",
+      },
     ],
   },
 ];
