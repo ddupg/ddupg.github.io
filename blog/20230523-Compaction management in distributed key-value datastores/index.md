@@ -13,6 +13,8 @@ tags: [数据库, HBase, Compaction]
 
 在基于LSMT实现的数据库中，compaction是很重要的机制。compaction虽然有助于维持长期运行过程中的读低延迟，但在compaction过程中读延迟牺牲大。这篇论文中，深度分析了compaction相关的性能损耗，并提出了缓解的技术。我们将大的昂贵的compaction offload到了单独的compaction server，让datastore server更好地利用他自己的资源。此外，因为新compact的数据已经在compaction server的主内存里了，我们通过网络从compaction server把数据抓到datastore server的本地内存，避免读filesystem的性能损耗。事实上，在把workload切换到compaction server之前，预取 compact的数据已经可以消除缓存失效的影响，这时候compaction server只当是远程缓存。因此，我们实现了一个更智能的预热算法确保所有读请求都能被datastore server的本地缓存服务，即使它还在预热。我们已经集成进了hbase，使用YCSB和TPC-C的benchmark显示我们的方法显著消除了compaction相关的性能问题。也展示了compaction server可扩展性。
 
+<!-- truncate -->
+
 ## 1. INTRODUCTION
 
 这篇论文的主要贡献：
