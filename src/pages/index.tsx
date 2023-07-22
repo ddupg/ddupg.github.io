@@ -12,10 +12,9 @@ import styles from './index.module.css';
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   return (
-    <header className={clsx('hero--primary', styles.heroBanner)}>
+    <header className={clsx(styles.banner)}>
       <div className="container">
-        <h1 className="hero__title">{siteConfig.title}</h1>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <h1 className={clsx(styles.banner_text)}>{siteConfig.title}</h1>
       </div>
     </header>
   );
@@ -92,7 +91,7 @@ export default function Home(): JSX.Element {
 
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}>
+      title={siteConfig.title}>
       <main>
         <Particles options={particlesOptions} init={particlesInit} />
         <HomepageHeader />
