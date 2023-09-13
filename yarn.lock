@@ -4530,13 +4530,6 @@ decompress-response@^3.3.0:
   dependencies:
     mimic-response "^1.0.0"
 
-deep-eql@^4.1.3:
-  version "4.1.3"
-  resolved "https://registry.npmmirror.com/deep-eql/-/deep-eql-4.1.3.tgz#7c7775513092f7df98d8df9996dd085eb668cc6d"
-  integrity sha512-WaEtAOpRA1MQ0eohqZjpGD8zdI0Ovsm8mmFhaDN8dvDZzyoUMcYDnf5Y6iu7HTXxf8JDS23qWa4a+hKCDyOPzw==
-  dependencies:
-    type-detect "^4.0.0"
-
 deep-extend@^0.6.0:
   version "0.6.0"
   resolved "https://registry.npmmirror.com/deep-extend/-/deep-extend-0.6.0.tgz#c4fa7c95404a17a9c3e8ca7e1537312b736330ac"
@@ -7451,13 +7444,12 @@ react-transition-group@^4.4.2:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react-tsparticles@^2.11.0:
-  version "2.11.0"
-  resolved "https://registry.npmmirror.com/react-tsparticles/-/react-tsparticles-2.11.0.tgz#c227f9a16f3d70306dde43f5d769c2d6d846d462"
-  integrity sha512-wIb3Ua4Yw5nhziPHVrMUEC+T4s0Hp1bM9zjX2oCmZvzATjOrc+yA/Ie8+9m7HUbLGXewusGrLhLfWHEO1/NNsQ==
+react-tsparticles@^2.12.2:
+  version "2.12.2"
+  resolved "https://registry.yarnpkg.com/react-tsparticles/-/react-tsparticles-2.12.2.tgz#679054f229650db8398a646e2bb1c4a750f2a7de"
+  integrity sha512-/nrEbyL8UROXKIMXe+f+LZN2ckvkwV2Qa+GGe/H26oEIc+wq/ybSG9REDwQiSt2OaDQGu0MwmA4BKmkL6wAWcA==
   dependencies:
-    deep-eql "^4.1.3"
-    tsparticles-engine "^2.11.0"
+    tsparticles-engine "^2.12.0"
 
 react@^17.0.2:
   version "17.0.2"
@@ -8439,6 +8431,11 @@ tsparticles-engine@^2.11.0:
   resolved "https://registry.npmmirror.com/tsparticles-engine/-/tsparticles-engine-2.11.0.tgz#c687299f497c7b724966feebfc241fb4b22cc97a"
   integrity sha512-kL6aV/6TPNF3jU6ni8jBGSVdnXAvxaeGsFalR4h+L3uMPlmbRKVs/QSnG3shwWGdWJuFmPSmXC8nI1OIWCUYpA==
 
+tsparticles-engine@^2.12.0:
+  version "2.12.0"
+  resolved "https://registry.yarnpkg.com/tsparticles-engine/-/tsparticles-engine-2.12.0.tgz#4a52a8de4ab6085180abf27f4720f47caa1455fc"
+  integrity sha512-ZjDIYex6jBJ4iMc9+z0uPe7SgBnmb6l+EJm83MPIsOny9lPpetMsnw/8YJ3xdxn8hV+S3myTpTN1CkOVmFv0QQ==
+
 tsparticles-interaction-external-attract@^2.11.0:
   version "2.11.0"
   resolved "https://registry.npmmirror.com/tsparticles-interaction-external-attract/-/tsparticles-interaction-external-attract-2.11.0.tgz#42c96892c8490df7dbdc9f528125d9db0f9cf6b3"
@@ -8765,11 +8762,6 @@ tsparticles@^2.11.0:
     tsparticles-updater-tilt "^2.11.0"
     tsparticles-updater-twinkle "^2.11.0"
     tsparticles-updater-wobble "^2.11.0"
-
-type-detect@^4.0.0:
-  version "4.0.8"
-  resolved "https://registry.npmmirror.com/type-detect/-/type-detect-4.0.8.tgz#7646fb5f18871cfbb7749e69bd39a6388eb7450c"
-  integrity sha512-0fr/mIH1dlO+x7TlcMy+bIDqKPsw/70tVyeHW787goQjhmqaZe10uwLujubK9q9Lg6Fiho1KUKDYz0Z7k7g5/g==
 
 type-fest@^0.20.2:
   version "0.20.2"
