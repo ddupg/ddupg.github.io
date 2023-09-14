@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkddupg_github_io=self.webpackChunkddupg_github_io||[]).push([[9291],{9533:a=>{a.exports=JSON.parse('{"label":"MVCC","permalink":"/blog/tags/mvcc","allTagsPath":"/blog/tags","count":1}')}}]);
