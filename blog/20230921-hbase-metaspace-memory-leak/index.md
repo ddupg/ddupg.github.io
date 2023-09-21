@@ -49,6 +49,8 @@ tags: [数据库, HBase, JVM/metaspace]
 
 赶紧打个heap dump好慢慢查。因为打dump会Full GC，发生长时间的STW，大内存的RS会因为和ZK失联宕机，所以一般线上不轻易打dump。
 
+> 在我重启了两台节点之后，用户侧的延迟就明显下降了
+
 ## 排查
 
 把heap dump下载到本地之后，用MAT打开。好家伙250多万的Class，这时候可以确定是metaspace出问题了。
