@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkddupg_github_io=self.webpackChunkddupg_github_io||[]).push([[8789],{6754:a=>{a.exports=JSON.parse('{"label":"JVM/metaspace","permalink":"/blog/tags/jvm-metaspace","allTagsPath":"/blog/tags","count":1}')}}]);
