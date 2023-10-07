@@ -41,11 +41,14 @@ tags: [数据库, HBase, JVM/metaspace]
 
 其中一台已经没法用arthas进行挂载了，只能先重启。
 
-剩余一台赶紧用arthas挂进去看，发现堆内堆外大小都正常，但metaspace达到12G。当时也没有截图，这里用目前线上的一台机器示意一下，有机会再补图：
+剩余一台赶紧用arthas挂进去看，发现堆内堆外大小都正常，但metaspace达到12G。当时也没有截图，这里用目前线上的一台机器示意一下：
 
 ![非故障现场的截图，这是目前线上机器的情况，仅示意](arthas-metaspace.png)
 
-这时候猜测是JVM的metaspace发生了内存泄漏，因为metaspace没有大小限制，会一直像操作系统申请内存，直至把内存占满。
+补图，某个节点的metaspace逐渐增长到11G：
+![非故障现场的截图，这是目前线上机器的情况，仅示意](online-jstat.png)
+
+这时候猜测是JVM的metaspace发生了内存泄漏，因为metaspace没有大小限制，会一直向操作系统申请内存，直至把内存占满。
 
 赶紧打个heap dump好慢慢查。因为打dump会Full GC，发生长时间的STW，大内存的RS会因为和ZK失联宕机，所以一般线上不轻易打dump。
 
@@ -125,6 +128,116 @@ more soft reference churn in applications.
 6. 而每个`GeneratedMethodAccessorXXX`都有个单独的ClassLoader，就是`DelegatingClassLoader`，这就是`DelegatingClassLoader`也有250多万个的原因
 
 目前不明确的问题还有为什么`GeneratedMethodAccessor`和`DelegatingClassLoader`不会被回收，我理解在metaspace不断扩大的过程中，应该是会触发回收的。不知道是不是和SGC有关。
+
+## 模拟复现
+
+复现的基本思路：
+1. 模拟Filter触发反射
+2. 使用类似的GC和JVM参数
+3. 监控一段时间的metaspace变化
+
+### 代码模拟
+
+写个demo模拟HBase高并发的情况下处理Filter：
+
+```java
+public class MemLeakFilter {
+
+  // 构造一些不同的filter
+  private final List<Supplier<Filter>> suppliers = Lists.newArrayList(
+    FirstKeyOnlyFilter::new,
+    () -> new ColumnCountGetFilter(3),
+    () -> new ColumnPrefixFilter("prefix".getBytes()),
+    () -> new ColumnRangeFilter("start".getBytes(), true, "end".getBytes(), true),
+    () -> new ColumnValueFilter("family".getBytes(), "qualifier".getBytes(), CompareOperator.EQUAL, "value".getBytes())
+  );
+
+  public static void main(String[] args) throws Exception {
+    new MemLeakFilter().run();
+  }
+
+  private void run() {
+    // 64线程并发执行
+    ExecutorService es = Executors.newFixedThreadPool(64);
+    for (int i = 0; i < 64; i++) {
+      Supplier<Filter> supplier = suppliers.get(i % suppliers.size());
+      es.submit(() -> runOnce(supplier));
+    }
+  }
+
+  private void runOnce(Supplier<Filter> supplier) {
+    int cnt = 0;
+    while (true) {
+      try {
+        if (++ cnt == 100000) {
+          cnt = 0;
+          Thread.sleep(10);
+        }
+        // 构造一些大对象，尽量频繁触发GC
+        byte[] data = new byte[1024];
+        Arrays.fill(data, (byte) 1);
+        // 触发filter的序列化和反序列化，ProtobufUtil.toFilter中会执行反射的逻辑
+        ProtobufUtil.toFilter(ProtobufUtil.toFilter(supplier.get()));
+      } catch (Exception e) {
+        log.warn("filter exception", e);
+      }
+    }
+  }
+}
+```
+
+### 执行demo
+
+参考线上JVM配置，执行demo程序：
+1. 内存设置，堆内外都是1G
+2. 使用SGC，并开启`-XX:+ShenandoahAlwaysClearSoftRefs`
+
+```shell
+/opt/soft/j2sdk-image/bin/java \
+-XX:+UnlockExperimentalVMOptions \
+-verbosegc \
+-XX:+PrintGCApplicationStoppedTime \
+-Xmx1g -Xms1g -XX:MaxDirectMemorySize=1g -Xss256k \
+-XX:+PrintTenuringDistribution \
+-XX:PrintFLSStatistics=1 \
+-XX:+DisableExplicitGC \
+-XX:+UseShenandoahGC \
+-XX:ShenandoahAllocationThreshold=5 \
+-XX:ShenandoahRefProcFrequency=3 \
+-XX:+ShenandoahAlwaysClearSoftRefs \
+-XX:ShenandoahGCHeuristics=compact \
+-XX:ConcGCThreads=8 -XX:ParallelGCThreads=12 \
+-XX:+UseBiasedLocking \
+-XX:NumberOfGCLogFiles=100 -XX:+UseGCLogFileRotation -XX:GCLogFileSize=128m \
+-XX:+PrintHeapAtGC \
+-XX:+PrintGCDateStamps \
+-XX:+UseNUMA \
+-XX:+PrintSafepointStatistics \
+-XX:+SafepointTimeout \
+-XX:+PrintAdaptiveSizePolicy \
+-XX:+PrintGC -XX:+PrintGCDetails \
+-XX:+AlwaysPreTouch \
+-XX:PrintSafepointStatisticsCount=1 \
+-XX:+HeapDumpOnOutOfMemoryError \
+-XX:HeapDumpPath=/home/work/test \
+-jar demo.jar
+```
+
+### 监控metaspace
+
+demo程序启动后，使用jstat一直监控进程内存的变化
+```shell
+jstat -gc <pid> 10000
+```
+
+从9.26号收集到10.7号，10s一个点，metaspace的MC从32M逐渐增长到128M。
+
+![demo程序11天metaspace的变化](demo-jstat.png)
+
+### 小结
+
+1. 基本上成功复现线上问题，但确实没有线上观察到的内存增长那么快
+2. 因为整个复现过程比较漫长，所以没做更多的实验，不好判断各个参数对metaspace的影响程度
 
 ## 后续
 
