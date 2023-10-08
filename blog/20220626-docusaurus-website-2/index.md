@@ -1,5 +1,5 @@
 ---
-slug: docusaurus-website-2
+slug: 20220626-docusaurus-website-2
 title: Docusaurus建站（2）- 部署到GitHub Pages
 date: 2022-06-26T11:00
 author: Ddupg

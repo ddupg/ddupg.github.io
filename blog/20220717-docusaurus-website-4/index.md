@@ -1,5 +1,5 @@
 ---
-slug: docusaurus-website-4
+slug: 20220717-docusaurus-website-4
 title: Docusaurus建站（4）- 自定义页面
 date: 2022-07-17T11:27:25.140Z
 author: Ddupg

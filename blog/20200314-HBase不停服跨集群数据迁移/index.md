@@ -1,5 +1,5 @@
 ---
-slug: HBase不停服跨集群数据迁移
+slug: 20200314-HBase不停服跨集群数据迁移
 title: HBase不停服跨集群数据迁移
 date: 2020-03-14T15:42
 author: Ddupg

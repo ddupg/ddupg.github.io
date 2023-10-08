@@ -1,5 +1,5 @@
 ---
-slug: docusaurus-website-3
+slug: 20220626-docusaurus-website-3
 title: Docusaurus建站（3）- hygen生成页面模版
 date: 2022-06-26T12:00
 author: Ddupg

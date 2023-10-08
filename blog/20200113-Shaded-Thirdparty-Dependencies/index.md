@@ -1,5 +1,5 @@
 ---
-slug: Shaded-Thirdparty-Dependencies
+slug: 20200113-Shaded-Thirdparty-Dependencies
 title: Maven项目以Shaded形式引入第三方依赖库
 date: 2020-01-13T17:46
 author: Ddupg

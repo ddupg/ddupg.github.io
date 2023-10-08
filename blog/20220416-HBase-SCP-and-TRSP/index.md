@@ -1,5 +1,5 @@
 ---
-slug: HBase-SCP-and-TRSP
+slug: 20220416-HBase-SCP-and-TRSP
 title: HBase SCP & TRSP
 date: 2020-04-16T15:20
 author: Ddupg

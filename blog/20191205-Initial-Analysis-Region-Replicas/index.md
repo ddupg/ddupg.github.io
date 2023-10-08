@@ -1,5 +1,5 @@
 ---
-slug: Initial-Analysis-Region-Replicas
+slug: 20191205-Initial-Analysis-Region-Replicas
 title: 初步了解HBase Region Replicas
 date: 2019-12-05T15:00
 author: Ddupg

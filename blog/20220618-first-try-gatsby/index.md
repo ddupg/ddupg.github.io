@@ -1,5 +1,5 @@
 ---
-slug: first-try-gatsby
+slug: 20220618-first-try-gatsby
 title: 初尝Gatsby
 date: 2022-06-18T08:11
 author: Ddupg

@@ -1,5 +1,5 @@
 ---
-slug: CompletableFuture-in-high-concurrent
+slug: 20191011-CompletableFuture-in-high-concurrent
 title: 「记」Jdk8 CompletableFuture在高并发环境下的性能问题
 date: 2019-10-11T19:30
 author: Ddupg

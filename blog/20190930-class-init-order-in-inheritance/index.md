@@ -1,5 +1,5 @@
 ---
-slug: class-init-order-in-inheritance
+slug: 20190930-class-init-order-in-inheritance
 title: 「记」子类复写父类方法与类初始化顺序引发的bug
 date: 2019-09-30T10:00
 author: Ddupg
