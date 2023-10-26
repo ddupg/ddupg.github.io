@@ -113,7 +113,15 @@ const config = {
         darkTheme: darkCodeTheme,
         additionalLanguages: ['java', 'python', 'go'],
       },
+      mermaid: {
+        theme: {light: 'neutral', dark: 'forest'},
+      },
     }),
+    
+    markdown: {
+      mermaid: true,
+    },
+    themes: ['@docusaurus/theme-mermaid'],
 };
 
 module.exports = config;
