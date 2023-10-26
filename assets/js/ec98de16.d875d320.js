@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkddupg_github_io=self.webpackChunkddupg_github_io||[]).push([[8572],{235:s=>{s.exports=JSON.parse('{"label":"Snapshot","permalink":"/blog/tags/snapshot","allTagsPath":"/blog/tags","count":2}')}}]);
