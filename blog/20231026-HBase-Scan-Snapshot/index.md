@@ -9,6 +9,8 @@ description: HBase Scan Snapshot基本原理
 tags: [数据库, HBase, Snapshot]
 ---
 
+建议先阅读前文[HBase Snapshot基本原理](https://ddupg.github.io/blog/20230706-hbase-snapshot)。
+
 HBase作为数据库，可以用于线上TP类需求，但如果直接基于HBase表运行AP类的离线分析型任务，则有2个问题：
 
 - 可能会对线上读写产生影响，造成集群抖动。
