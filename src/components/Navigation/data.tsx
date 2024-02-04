@@ -45,6 +45,11 @@ const navigationData: Classify[] = [
         url: "https://6pen.art/",
         intro: "AI生成配图"
       },
+      {
+        name: "本机IP地址",
+        url: "https://zh-hans.ipshu.com/my_info",
+        intro: "自测发现，查询本机IP最准的网站"
+      },
     ],
   },
   {
