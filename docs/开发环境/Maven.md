@@ -10,6 +10,18 @@ mvn test -D test=<ClassName>
 mvn test -D test=<ClassName>#<MethodName>
 ```
 
+### mvn test 跳过指定类
+指定一个具体的类
+```
+mvn test -D test.exclude=<ClassName>
+```
+通过表达式匹配，指定多个类
+```
+mvn test -D test.exclude.pattern=<pattern>
+# for example
+mvn test -D test.exclude.pattern=**/replication.TestReplicationSmallTestsSync.java
+```
+
 ### mvn test失败重试，发现flaky UT
 用`surefire.rerunFailingTestsCount`参数控制失败后重试次数：
 ```
